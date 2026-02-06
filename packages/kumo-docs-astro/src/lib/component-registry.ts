@@ -4,7 +4,7 @@
  */
 
 // Import the registry JSON from the kumo package export
-import registry from "@cloudflare/kumo/ai/component-registry.json";
+import { readFileSync } from "node:fs";
 
 // Import shared types from @cloudflare/kumo
 import type {
@@ -22,6 +22,13 @@ export type ComponentData = ComponentSchema;
 export type { ComponentRegistry };
 
 // Cast through unknown since the JSON structure may have extra fields
+
+const registry = JSON.parse(
+  readFileSync(
+    new URL("../../../kumo/ai/component-registry.json", import.meta.url),
+    "utf8",
+  ),
+) as unknown as ComponentRegistry;
 const typedRegistry = registry as unknown as ComponentRegistry;
 
 /**

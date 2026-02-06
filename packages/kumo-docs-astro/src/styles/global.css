@@ -1,5 +1,5 @@
-@source "../../../kumo/dist/**/*.{js,jsx,ts,tsx}";
-@import "@cloudflare/kumo/styles";
+@source "../../../kumo/src/**/*.{js,jsx,ts,tsx}";
+@import "../../../kumo/src/styles/kumo.css";
 @import "tailwindcss";
 
 @custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));

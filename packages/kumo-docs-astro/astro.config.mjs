@@ -65,6 +65,22 @@ export default defineConfig({
     // @ts-expect-error - Vite version mismatch between Astro and @tailwindcss/vite
     plugins: [tailwindcss(), kumoColorsPlugin(), kumoRegistryPlugin()],
 
+    resolve: {
+      alias: {
+        "@cloudflare/kumo/styles": resolve(__dirname, "../kumo/src/styles"),
+        "@cloudflare/kumo": resolve(__dirname, "../kumo/src/index.ts"),
+      },
+    },
+    server: {
+      fs: {
+        allow: [
+          resolve(__dirname),
+          resolve(__dirname, "../kumo"),
+          "../../node_modules",
+        ],
+      },
+    },
+
     define: {
       __KUMO_VERSION__: JSON.stringify(buildInfo.kumoVersion),
       __DOCS_VERSION__: JSON.stringify(buildInfo.docsVersion),

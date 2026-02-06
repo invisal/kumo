@@ -1,5 +1,12 @@
 import type { APIRoute } from "astro";
-import componentRegistry from "@cloudflare/kumo/ai/component-registry.json";
+import { readFileSync } from "node:fs";
+
+const componentRegistry = JSON.parse(
+  readFileSync(
+    new URL("../../../../kumo/ai/component-registry.json", import.meta.url),
+    "utf8",
+  ),
+);
 
 export const GET: APIRoute = () => {
   return new Response(JSON.stringify(componentRegistry), {
