@@ -61,22 +61,6 @@ jobs:
           path: packages/kumo-docs-astro/dist/
           retention-days: 1
 
-      - name: Save PR metadata
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          mkdir -p /tmp/pr-metadata
-          echo "$PR_NUMBER" > /tmp/pr-metadata/pr_number
-          echo "$HEAD_SHA" > /tmp/pr-metadata/head_sha
-
-      - name: Upload PR metadata
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr-metadata
-          path: /tmp/pr-metadata/
-          retention-days: 1
-
   # Stage 2 (internal path): Deploy docs preview for non-fork PRs.
   # Runs in the same workflow with secrets available.
   # Fork PRs are handled by preview-deploy.yml (workflow_run).
