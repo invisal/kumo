@@ -203,7 +203,12 @@ export {
   type DayPickerProps,
 } from "./components/date-picker";
 
-export { Chart, ChartPalette, TimeseriesChart } from "./components/chart";
+export {
+  Chart,
+  ChartPalette,
+  TimeseriesChart,
+  ChartLegend,
+} from "./components/chart";
 // PLOP_INJECT_EXPORT
 
 // Utils
