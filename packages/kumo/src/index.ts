@@ -191,7 +191,12 @@ export {
   type CloudflareLogoSvgVariant,
   type CloudflareLogoSvgColor,
 } from "./components/cloudflare-logo";
-export { Chart, ChartPalette, TimeseriesChart } from "./components/chart";
+export {
+  Chart,
+  ChartPalette,
+  TimeseriesChart,
+  ChartLegend,
+} from "./components/chart";
 // PLOP_INJECT_EXPORT
 
 // Utils
