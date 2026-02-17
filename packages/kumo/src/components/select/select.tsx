@@ -66,6 +66,7 @@ export function selectVariants(_props: KumoSelectVariantsProps = {}) {
 /**
  * Auto-generates Select.Option elements from items prop.
  * Only used when children are not explicitly provided.
+ * Filters out null values (typically used for placeholders).
  */
 function renderOptionsFromItems<T>(
   items:
@@ -81,15 +82,17 @@ function renderOptionsFromItems<T>(
     ));
   }
 
-  // Handle array format: [{ value, label }]
-  return items.map((item, index) => (
-    <Option
-      key={typeof item.value === "string" ? item.value : `option-${index}`}
-      value={item.value}
-    >
-      {item.label}
-    </Option>
-  ));
+  // Handle array format: [{ value, label }] - filter out null values
+  return items
+    .filter((item) => item.value !== null)
+    .map((item, index) => (
+      <Option
+        key={typeof item.value === "string" ? item.value : `option-${index}`}
+        value={item.value}
+      >
+        {item.label}
+      </Option>
+    ));
 }
 
 type SelectPropsGeneric<
