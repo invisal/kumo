@@ -273,7 +273,7 @@ function GroupLabel(props: ComboboxBase.GroupLabel.Props) {
   return (
     <ComboboxBase.GroupLabel
       {...props}
-      className="ml-[16px] px-4 py-1.5 text-sm font-medium"
+      className="px-2 py-1.5 text-sm text-kumo-subtle"
     />
   );
 }
