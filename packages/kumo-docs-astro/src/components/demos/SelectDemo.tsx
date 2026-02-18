@@ -30,34 +30,60 @@ export function SelectLabelValueDemo() {
         bug: "Bug",
         documentation: "Documentation",
         feature: "Feature",
+        long: "This is a very long label that should be truncated with an ellipsis",
       }}
     >
       <Select.Option value="bug">Bug</Select.Option>
       <Select.Option value="documentation">Documentation</Select.Option>
       <Select.Option value="feature">Feature</Select.Option>
+      <Select.Option value="long">
+        This is a very long label that should be truncated with an ellipsis
+      </Select.Option>
     </Select>
   );
 }
 
 export function SelectPlaceholderDemo() {
   const [value, setValue] = useState<string | null>(null);
+  const [value2, setValue2] = useState<string | null>(null);
 
   return (
-    <Select
-      className="w-[200px]"
-      value={value}
-      onValueChange={(v) => setValue(v as string | null)}
-      items={[
-        { value: null, label: "Please select" },
-        { value: "bug", label: "Bug" },
-        { value: "documentation", label: "Documentation" },
-        { value: "feature", label: "Feature" },
-      ]}
-    >
-      <Select.Option value="bug">Bug</Select.Option>
-      <Select.Option value="documentation">Documentation</Select.Option>
-      <Select.Option value="feature">Feature</Select.Option>
-    </Select>
+    <div className="flex flex-col gap-4">
+      <Select
+        className="w-[200px]"
+        value={value}
+        onValueChange={(v) => setValue(v as string | null)}
+        items={[
+          { value: null, label: "Please select" },
+          { value: "bug", label: "Bug" },
+          { value: "documentation", label: "Documentation" },
+          { value: "feature", label: "Feature" },
+        ]}
+      >
+        <Select.Option value="bug">Bug</Select.Option>
+        <Select.Option value="documentation">Documentation</Select.Option>
+        <Select.Option value="feature">Feature</Select.Option>
+      </Select>
+
+      <Select
+        className="w-[200px]"
+        value={value2}
+        onValueChange={(v) => setValue2(v as string | null)}
+        items={[
+          {
+            value: null,
+            label: "Please select an option from the list below",
+          },
+          { value: "bug", label: "Bug" },
+          { value: "documentation", label: "Documentation" },
+          { value: "feature", label: "Feature" },
+        ]}
+      >
+        <Select.Option value="bug">Bug</Select.Option>
+        <Select.Option value="documentation">Documentation</Select.Option>
+        <Select.Option value="feature">Feature</Select.Option>
+      </Select>
+    </div>
   );
 }
 
@@ -154,6 +180,80 @@ export function SelectMultipleDemo() {
       <Select.Option value="Read">Read</Select.Option>
       <Select.Option value="Write">Write</Select.Option>
       <Select.Option value="CreatedAt">Created At</Select.Option>
+    </Select>
+  );
+}
+
+const products = [
+  {
+    id: 1,
+    name: "Basic Plan",
+    description: "For individuals and small teams",
+    price: "$9/mo",
+  },
+  {
+    id: 2,
+    name: "Pro Plan",
+    description: "For growing businesses with more needs",
+    price: "$29/mo",
+  },
+  {
+    id: 3,
+    name: "Enterprise",
+    description: "Custom solutions for large organizations",
+    price: "$99/mo",
+  },
+  {
+    id: 4,
+    name: "Startup",
+    description: "Discounted plan for early-stage startups",
+    price: "$5/mo",
+  },
+];
+
+function ProductLabel({
+  name,
+  description,
+}: {
+  name: string;
+  description: string;
+}) {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <Text>{name}</Text>
+      <Text variant="secondary">{description}</Text>
+    </div>
+  );
+}
+
+export function SelectMultiLineDemo() {
+  const [value, setValue] = useState<(typeof products)[0] | null>(products[0]);
+
+  return (
+    <Select
+      className="max-w-lg h-auto p-2 px-4"
+      value={value}
+      onValueChange={(v) => setValue(v as (typeof products)[0] | null)}
+      isItemEqualToValue={(item, value) => item?.id === value?.id}
+      renderValue={(product) =>
+        product ? (
+          <ProductLabel name={product.name} description={product.description} />
+        ) : (
+          <Text>Select a plan</Text>
+        )
+      }
+    >
+      {products.map((product) => (
+        <Select.Option key={product.id} value={product}>
+          <div className="flex w-[340px] items-center justify-between gap-4">
+            <ProductLabel
+              name={product.name}
+              description={product.description}
+            />
+            <Text>{product.price}</Text>
+          </div>
+        </Select.Option>
+      ))}
     </Select>
   );
 }
