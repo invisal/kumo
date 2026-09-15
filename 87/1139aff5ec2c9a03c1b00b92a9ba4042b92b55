@@ -1,0 +1,19 @@
+packages/kumo/src/code/provider.test.tsx
+  s_718c1e7d5ff885::t_c3d320d3186c36 408,411,426-433,460-461
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "871139aff5ec2c9a03c1b00b92a9ba4042b92b55",
+  "prompts": {},
+  "sessions": {
+    "s_718c1e7d5ff885": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f5b55db9affekF4FN0o5SknEmo",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Visal In <invisal@gmail.com>"
+    }
+  }
+}
